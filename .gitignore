@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.python-version
+
+# Env
+.venv/
+venv/
+env/
+.env
+
+# Test
+.pytest_cache/
+.coverage
+
