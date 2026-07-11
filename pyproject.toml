@@ -1,0 +1,18 @@
+[project]
+name = "cpe-mail-extractor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "bandit>=1.9.4",
+    "black>=26.5.1",
+    "pytest>=9.1.1",
+    "ruff>=0.15.21",
+]
