@@ -8,7 +8,6 @@ def notify(mail, webhook):
             {
                 "title": "Nouveau mail recu",
                 "description": mail.subject,
-
                 "fields": [
                     {
                         "name": "Expéditeur",
@@ -30,12 +29,10 @@ def notify(mail, webhook):
         ]
     }
 
-
     response = requests.post(
         webhook,
         json=payload,
         timeout=10,
     )
-
 
     response.raise_for_status()

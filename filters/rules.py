@@ -1,6 +1,4 @@
-KEYWORDS = [
-
-]
+KEYWORDS = []
 
 IGNORED = [
     "newsletter",
@@ -16,6 +14,6 @@ def is_important(mail):
 
     if not KEYWORDS:
         return True
-    
+
     else:
         return any(word in subject for word in KEYWORDS)

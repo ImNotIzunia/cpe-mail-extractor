@@ -6,7 +6,6 @@ from mail.model import Mail
 
 
 class ImapClient:
-
     def __init__(self, host, port, email, password):
         self.client = imaplib.IMAP4_SSL(host, port)
         self.client.login(email, password)

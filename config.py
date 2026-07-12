@@ -10,12 +10,8 @@ class Settings(BaseSettings):
 
     discord_webhook: str
 
-
     class Config:
         env_file = ".env"
 
 
 settings = Settings()
-
-
-

@@ -6,28 +6,17 @@ STATE_FILE = Path("data/state.json")
 
 def load_state():
     if not STATE_FILE.exists():
-        return {
-            "processed": []
-        }
-    
+        return {"processed": []}
+
     try:
-        return json.loads(
-            STATE_FILE.read_text()
-        )
-    
+        return json.loads(STATE_FILE.read_text())
+
     except json.JSONDecodeError:
-        return {
-            "processed": []
-        }
-    
+        return {"processed": []}
+
 
 def save_state(state):
-    STATE_FILE.write_text(
-        json.dumps(
-            state,
-            indent=4
-        )
-    )
+    STATE_FILE.write_text(json.dumps(state, indent=4))
 
 
 def is_processed(uid, state):

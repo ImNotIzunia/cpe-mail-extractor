@@ -44,7 +44,6 @@ def main():
         important_count = 0
 
         for mail in mails:
-
             if is_processed(mail.uid, state):
                 logger.debug(
                     "Mail %s already processed",
@@ -52,34 +51,23 @@ def main():
                 )
                 continue
 
-
             if is_important(mail):
-
                 logger.info(
                     "Important mail detected: %s",
                     mail.subject,
                 )
 
-                notify(
-                    mail,
-                    settings.discord_webhook
-                )
+                notify(mail, settings.discord_webhook)
 
                 important_count += 1
 
             else:
-
                 logger.info(
                     "Ignored mail: %s",
                     mail.subject,
                 )
 
-
-            mark_processed(
-                mail.uid,
-                state
-            )
-
+            mark_processed(mail.uid, state)
 
         save_state(state)
 
@@ -88,27 +76,17 @@ def main():
             important_count,
         )
 
-
     except Exception:
-        logger.exception(
-            "CMA crashed"
-        )
+        logger.exception("CMA crashed")
 
         raise
 
-
     finally:
-
         if client:
             client.close()
 
-            logger.info(
-                "IMAP connection closed"
-            )
+            logger.info("IMAP connection closed")
 
 
 if __name__ == "__main__":
     main()
-
-
-    

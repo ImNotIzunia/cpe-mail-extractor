@@ -14,13 +14,9 @@ def create_mail(subject):
 
 def test_urgent():
 
-    assert is_important(
-        create_mail("URGENT")
-    )
+    assert is_important(create_mail("URGENT"))
 
 
 def test_newsletter():
 
-    assert not is_important(
-        create_mail("Newsletter BDE")
-    )
+    assert not is_important(create_mail("Newsletter BDE"))

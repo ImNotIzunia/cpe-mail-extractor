@@ -4,5 +4,3 @@ def notify(mail):
     print(mail.sender)
     print(mail.subject)
     print(mail.date)
-
-    

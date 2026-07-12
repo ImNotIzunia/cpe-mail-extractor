@@ -11,13 +11,6 @@ def setup_logger():
         format="%(asctime)s | %(levelname)s | %(message)s",
         handlers=[
             logging.StreamHandler(),
-            logging.FileHandler(
-                LOG_DIR / "cma.log",
-                encoding="utf-8"
-            ),
+            logging.FileHandler(LOG_DIR / "cma.log", encoding="utf-8"),
         ],
     )
-
-
-
-    
