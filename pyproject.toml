@@ -11,6 +11,16 @@ dependencies = [
     "requests>=2.34.2",
 ]
 
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project.scripts]
+cme = "main:main"
+
+
 [dependency-groups]
 dev = [
     "bandit>=1.9.4",
@@ -18,6 +28,7 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.15.21",
 ]
+
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -27,13 +38,28 @@ pythonpath = [
     "."
 ]
 
+
+[tool.uv]
+package = true
+
+
 [tool.ruff]
 line-length = 88
 target-version = "py314"
+
 
 [tool.ruff.lint]
 select = [
     "E",
     "F",
     "I",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "mail",
+    "filters",
+    "notify",
+    "utils",
+    "data",
 ]
