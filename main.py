@@ -1,60 +1,55 @@
-import json
-import os
+import logging
 
-from dotenv import load_dotenv
-
-from filters.rules import is_important
+from config import settings
 from mail.imap_client import ImapClient
-from notify.console import notify
+from filters.rules import is_important
+from notify.discord import notify
+
+from data.state import (
+    load_state,
+    save_state,
+    is_processed,
+    mark_processed,
+)
 
 
-load_dotenv()
-
-STATE_FILE = "data/state.json"
-
-
-def load_state():
-    if not os.path.exists(STATE_FILE):
-        return {"last_uid": 0}
-    
-    with open(STATE_FILE) as f:
-        return json.load(f)
-    
-
-def save_state(uid):
-    with open(STATE_FILE, "w") as f:
-        json.dump({"last_uid": uid}, f)
+logging.basicConfig(
+    level=logging.INFO,
+)
 
 
 state = load_state()
 
 
 client = ImapClient(
-    os.getenv("IMAP_SERVER"),
-    int(os.getenv("IMAP_PORT")),
-    os.getenv("EMAIL"),
-    os.getenv("PASSWORD")
+    settings.imap_server,
+    settings.imap_port,
+    settings.email,
+    settings.password,
 )
 
 
 mails = client.unread()
 
-last = state["last_uid"]
-
 
 for mail in mails:
 
-    if mail["uid"] <= last:
+    if is_processed(mail.uid, state):
         continue
 
     if is_important(mail):
-        notify(mail)
 
-    last = max(last, mail["uid"])
+        notify(
+            mail,
+            settings.discord_webhook
+        )
+
+    mark_processed(
+        mail.uid,
+        state
+    )
 
 
-save_state(last)
+save_state(state)
 
 client.close()
-
-

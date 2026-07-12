@@ -9,7 +9,7 @@ IGNORED = [
 
 def is_important(mail):
 
-    subject = mail["subject"].lower()
+    subject = mail.subject.lower()
 
     if any(word in subject for word in IGNORED):
         return False

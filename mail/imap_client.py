@@ -2,15 +2,16 @@ import email
 import imaplib
 
 from mail.decoder import decode
+from mail.model import Mail
+
 
 class ImapClient:
-    
+
     def __init__(self, host, port, email, password):
         self.client = imaplib.IMAP4_SSL(host, port)
         self.client.login(email, password)
 
-    
-    def unread(self):
+    def unread(self) -> list[Mail]:
         self.client.select("INBOX")
 
         _, data = self.client.search(None, "UNSEEN")
@@ -23,18 +24,16 @@ class ImapClient:
             msg = email.message_from_bytes(raw[0][1])
 
             mails.append(
-                {
-                    "uid": int(uid),
-                    "from": decode(msg["From"]),
-                    "subject": decode(msg["Subject"]),
-                    "date": msg["Date"],
-                }
+                Mail(
+                    uid=int(uid),
+                    sender=decode(msg["From"]),
+                    subject=decode(msg["Subject"]),
+                    date=msg["Date"],
+                )
             )
 
         return mails
-    
 
     def close(self):
         self.client.close()
         self.client.logout()
-
