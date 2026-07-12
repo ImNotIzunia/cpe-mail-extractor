@@ -3,18 +3,39 @@ import requests
 
 def notify(mail, webhook):
 
-    data = {
-        "content":
-        f""" Nouvel email de CPE
-        
-        **De :** {mail.sender}
-        **Objet :** {mail.subject}
-        **Date :** {mail.date}*
-        """
+    payload = {
+        "embeds": [
+            {
+                "title": "Nouveau mail recu",
+                "description": mail.subject,
+
+                "fields": [
+                    {
+                        "name": "Expéditeur",
+                        "value": mail.sender,
+                        "inline": False,
+                    },
+                    {
+                        "name": "Date",
+                        "value": mail.date,
+                        "inline": False,
+                    },
+                    {
+                        "name": "UID",
+                        "value": str(mail.uid),
+                        "inline": False,
+                    },
+                ],
+            }
+        ]
     }
 
-    requests.post(
+
+    response = requests.post(
         webhook,
-        json=data,
+        json=payload,
         timeout=10,
     )
+
+
+    response.raise_for_status()

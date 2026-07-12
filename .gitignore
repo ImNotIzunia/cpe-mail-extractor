@@ -13,3 +13,8 @@ env/
 .pytest_cache/
 .coverage
 
+# Logs
+*.log
+
+# Data
+state.json
