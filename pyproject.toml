@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "A simple script to handle the lack of email forwarding"
 readme = "README.md"
 requires-python = ">=3.14"
+
 dependencies = [
     "pydantic-settings>=2.14.2",
     "python-dotenv>=1.2.2",
@@ -24,4 +25,15 @@ testpaths = [
 ]
 pythonpath = [
     "."
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
 ]

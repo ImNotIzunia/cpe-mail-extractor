@@ -1,5 +1,4 @@
-name: CI
-
+name: CMA CI
 
 on:
   push:
@@ -8,14 +7,14 @@ on:
 
 jobs:
 
-  test:
+  quality:
 
     runs-on: ubuntu-latest
 
 
     steps:
 
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
 
@@ -23,13 +22,17 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
 
+      - name: Set up Python
+        run: uv python install
+
+
       - name: Install dependencies
         run: uv sync
 
 
+      - name: Run Ruff
+        run: uv run ruff format --check .
+
+
       - name: Run tests
         run: uv run pytest
-
-
-      - name: Ruff check
-        run: uv run ruff check .

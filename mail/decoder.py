@@ -1,5 +1,6 @@
 from email.header import decode_header
 
+
 def decode(value: str | None) -> str:
     if not value:
         return ""

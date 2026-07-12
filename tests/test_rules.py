@@ -1,5 +1,5 @@
-from mail.model import Mail
 from filters.rules import is_important
+from mail.model import Mail
 
 
 def create_mail(subject):

@@ -1,19 +1,16 @@
 import logging
 
 from config import settings
-from utils.logger import setup_logger
-
-from mail.imap_client import ImapClient
-from filters.rules import is_important
-from notify.discord import notify
-
 from data.state import (
-    load_state,
-    save_state,
     is_processed,
+    load_state,
     mark_processed,
+    save_state,
 )
-
+from filters.rules import is_important
+from mail.imap_client import ImapClient
+from notify.discord import notify
+from utils.logger import setup_logger
 
 setup_logger()
 logger = logging.getLogger(__name__)
