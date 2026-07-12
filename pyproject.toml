@@ -1,7 +1,7 @@
 [project]
 name = "cpe-mail-extractor"
 version = "0.1.0"
-description = "Add your description here"
+description = "A simple script to handle the lack of email forwarding"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -15,4 +15,12 @@ dev = [
     "black>=26.5.1",
     "pytest>=9.1.1",
     "ruff>=0.15.21",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+pythonpath = [
+    "."
 ]
