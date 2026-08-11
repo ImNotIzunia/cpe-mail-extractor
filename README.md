@@ -25,7 +25,6 @@ Installler les dépendances :
 uv sync
 ```
 
-
 ## Configuration
 
 Créer un fichier `.env` en reprebnant le modèle du fichier `.env.example` et renseigner les informations nécessaires :
